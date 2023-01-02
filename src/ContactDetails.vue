@@ -1,10 +1,9 @@
 <template>
-  {{ $attrs }}
   <div>
     <Slot>
       <template #[slotName.slot1]="slotProps">
         {{ slotProps.textFromChildSlot }}
-        <br>
+        <br />
         Name: {{ company.name }}
       </template>
       <br />
@@ -15,14 +14,16 @@
 
     <div class="row">
       <h3>{{ contactMessage }}</h3>
-      <div class="card col-2" v-for="info in contactInfos" :key="info.name">
-        <div class="card-title">
-          <h3 class="title">{{ info.name }}</h3>
-        </div>
-        <div class="card-body">
-          <li>{{ info.age }}</li>
-          <li>{{ info.occupation }}</li>
-          <li>{{ info.phone }}</li>
+      <div class="card col-2" v-for="info in contactInfos" :key="info.id">
+          <div class="card-title">
+            <h3 class="title">{{ info.name }}</h3>
+          </div>
+          <div class="card-body">
+            <li>{{ info.age }}</li>
+            <li>{{ info.occupation }}</li>
+            <li>{{ info.phone }}</li>
+
+            <Emit :info="info"  @block="block" @unblock="unblock"></Emit>
         </div>
       </div>
     </div>
@@ -31,10 +32,12 @@
 
 <script>
 import Slot from "./Slot.vue";
+import Emit from "./Emit.vue";
 
 export default {
   components: {
     Slot: Slot,
+    Emit: Emit,
   },
 
   props: {
@@ -43,12 +46,16 @@ export default {
       required: true,
     },
     two: {
-      type: String
+      type: String,
     },
   },
 
   data() {
     return {
+      name: "",
+      age: "",
+      occupation: "",
+      phone: "",
       contactMessage: "All contact details",
       slotName: {
         slot1: "company",
@@ -61,6 +68,18 @@ export default {
         location: "USA",
       },
     };
+  },
+
+  methods: {
+    block(data) {
+      data.isBlocked = true;
+      console.log('Successfully block');
+    },
+
+    unblock(data) {
+      data.isBlocked = false;
+      console.log('Successfully unblock');
+    },
   },
 };
 </script>
