@@ -4,7 +4,10 @@
       <h3 class="title">Slot Example</h3>
     </div>
     <div class="card-body">
-      <slot name="company" :textFromChildSlot="'I\'m text from child component via slot!'"></slot>
+      <slot
+        name="company"
+        :textFromChildSlot="'I\'m text from child component via slot!'"
+      ></slot>
       <slot></slot>
       <slot name="company-location"></slot>
     </div>
@@ -15,7 +18,7 @@
 export default {
   data() {
     return {
-    //   textFromChildSlot: "I'm text from child component via slot!",
+      //   textFromChildSlot: "I'm text from child component via slot!",
     };
   },
 };

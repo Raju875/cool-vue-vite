@@ -14,16 +14,19 @@
 
     <div class="row">
       <h3>{{ contactMessage }}</h3>
+      <h4>Total: {{ contactInfos.length }}</h4>
+      <h4>Block: {{ blockUsers.length }}</h4>
+      <h4>Unblock: {{ unblockUsers.length }}</h4>
       <div class="card col-2" v-for="info in contactInfos" :key="info.id">
-          <div class="card-title">
-            <h3 class="title">{{ info.name }}</h3>
-          </div>
-          <div class="card-body">
-            <li>{{ info.age }}</li>
-            <li>{{ info.occupation }}</li>
-            <li>{{ info.phone }}</li>
+        <div class="card-title">
+          <h3 class="title">{{ info.name }}</h3>
+        </div>
+        <div class="card-body">
+          <li>{{ info.age }}</li>
+          <li>{{ info.occupation }}</li>
+          <li>{{ info.phone }}</li>
 
-            <Emit :info="info"  @block="block" @unblock="unblock"></Emit>
+          <Emit :info="info" @block="block" @unblock="unblock"></Emit>
         </div>
       </div>
     </div>
@@ -45,17 +48,12 @@ export default {
       type: Object,
       required: true,
     },
-    two: {
-      type: String,
-    },
   },
 
   data() {
     return {
-      name: "",
-      age: "",
-      occupation: "",
-      phone: "",
+      blockUsers: "",
+      unblockUsers: "",
       contactMessage: "All contact details",
       slotName: {
         slot1: "company",
@@ -73,13 +71,28 @@ export default {
   methods: {
     block(data) {
       data.isBlocked = true;
-      console.log('Successfully block');
+      var index = this.contactInfos.indexOf(data);
+      this.blockUsers.splice(index, 0, data); // add one item
+      this.unblockUsers.splice(index, 1); // remove one item
+      console.log("Successfully block");
     },
-
     unblock(data) {
       data.isBlocked = false;
-      console.log('Successfully unblock');
+      var index = this.contactInfos.indexOf(data);
+      this.unblockUsers.splice(index, 0, data); // add one item
+      this.blockUsers.splice(index, 1); // remove one item
+      console.log("Successfully unblock");
     },
+  },
+
+  mounted() {
+    this.blockUsers = this.contactInfos.filter(function (info) {
+      return info.isBlocked == true;
+    });
+
+    this.unblockUsers = this.contactInfos.filter(function (info) {
+      return info.isBlocked == false;
+    });
   },
 };
 </script>
