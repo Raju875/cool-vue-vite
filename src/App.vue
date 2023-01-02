@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>
+    <h3 style="margin: 5px;">
       {{ msg }}
     </h3>
     <Contact :contact-infos="infos"></Contact>
@@ -25,7 +25,7 @@ export default {
           age: 30,
           occupation: "Businessman",
           phone: "017",
-          isBlocked: true,
+          isBlocked: false,
         },
         {
           id: 2,
