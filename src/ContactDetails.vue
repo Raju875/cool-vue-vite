@@ -1,21 +1,41 @@
 <template>
-  <div class="row">
-    <h3>{{ contactMessage }}</h3>
-    <div class="card col-2" v-for="info in contactInfos" :key="info.name">
-      <div class="card-title">
-        <h3 class="title">{{ info.name }}</h3>
-      </div>
-      <div class="card-body">
-        <li>{{ info.age }}</li>
-        <li>{{ info.occupation }}</li>
-        <li>{{ info.phone }}</li>
+  <div>
+    <Slot>
+      <template #[slotName.slot1]="slotProps">
+        {{ slotProps.textFromChildSlot }}
+        <br>
+        Name: {{ company.name }}
+      </template>
+      <br />
+      URL: <a target="blank" :href="company.url">{{ company.url }}</a>
+      <br />
+      <template #[slotName.slot3]>Location: {{ company.location }}</template>
+    </Slot>
+
+    <div class="row">
+      <h3>{{ contactMessage }}</h3>
+      <div class="card col-2" v-for="info in contactInfos" :key="info.name">
+        <div class="card-title">
+          <h3 class="title">{{ info.name }}</h3>
+        </div>
+        <div class="card-body">
+          <li>{{ info.age }}</li>
+          <li>{{ info.occupation }}</li>
+          <li>{{ info.phone }}</li>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Slot from "./Slot.vue";
+
 export default {
+  components: {
+    Slot: Slot,
+  },
+
   props: {
     contactInfos: {
       type: Object,
@@ -26,6 +46,16 @@ export default {
   data() {
     return {
       contactMessage: "All contact details",
+      slotName: {
+        slot1: "company",
+        slot2: "default",
+        slot3: "company-location",
+      },
+      company: {
+        name: "CrowdBotics",
+        url: "https://www.crowdbotics.com/",
+        location: "USA",
+      },
     };
   },
 };
@@ -59,7 +89,7 @@ export default {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   max-width: 202px;
-  max-height: 55px;
+  max-height: 75px;
   /* overflow: auto; */
   overflow-y: hidden;
 }
