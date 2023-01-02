@@ -3,7 +3,7 @@
     <h3>
       {{ msg }}
     </h3>
-    <Contact :contact-infos="infos"></Contact>
+    <Contact :one="'one'" :two="'two'" :contact-infos="infos"></Contact>
   </div>
 </template>
 

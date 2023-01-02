@@ -1,4 +1,5 @@
 <template>
+  {{ $attrs }}
   <div>
     <Slot>
       <template #[slotName.slot1]="slotProps">
@@ -40,6 +41,9 @@ export default {
     contactInfos: {
       type: Object,
       required: true,
+    },
+    two: {
+      type: String
     },
   },
 
