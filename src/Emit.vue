@@ -3,15 +3,27 @@
     <button @click="$emit('unblock', info)" v-if="info.isBlocked">
       Unblock
     </button>
-    <button @click="$emit('block', info)" v-else>Block</button>
+    <button @click="provideInjectConsole(info)" v-else>Block</button>
   </div>
 </template>
 
 <script>
 export default {
+  inject: {
+    injectlocalMessage: {
+      from: 'provideMessage'
+    }
+  },
   props: {
     info: {
       type: Object,
+    },
+  },
+  methods: {
+    provideInjectConsole(data) {
+      this.$emit('block', data);
+      console.log(this.injectlocalMessage);
+      console.log("(" + data.id + ") " + data.name);
     },
   },
 };

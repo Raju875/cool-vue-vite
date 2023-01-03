@@ -1,23 +1,23 @@
 <template>
   <div>
-    <h3 style="margin: 5px;">
+    <h3 style="margin: 5px">
       {{ msg }}
     </h3>
     <Contact :contact-infos="infos"></Contact>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ContactDetails from "./ContactDetails.vue";
 
 export default {
   components: {
     Contact: ContactDetails,
   },
-
   data() {
     return {
       msg: "Hi! I am vue cli.",
+      statusUpdateMessage: "Status updated successfully.",
       infos: [
         {
           id: 1,
@@ -165,6 +165,12 @@ export default {
         },
       ],
     };
+  },
+
+  provide() {
+    return {
+      provideMessage: this.statusUpdateMessage
+    }
   },
 };
 </script>
