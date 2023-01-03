@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import ContactDetails from "./ContactDetails.vue";
+import ContactDetails from "./components/ContactDetails.vue";
 
 export default {
   components: {
