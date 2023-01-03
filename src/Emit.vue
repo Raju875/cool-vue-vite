@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  emits: ['unblock', 'block'],
   inject: {
     injectlocalMessage: {
       from: 'provideMessage'
