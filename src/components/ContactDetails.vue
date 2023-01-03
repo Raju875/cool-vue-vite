@@ -18,6 +18,7 @@
         <h4>Total: {{ contactInfos.length }}</h4>
         <h4>Block: {{ blockUsers.length }}</h4>
         <h4>Unblock: {{ unblockUsers.length }}</h4>
+        <h4>Click Counter: {{ clickCounter }}</h4>
       </div>
       <div class="card col-2" v-for="info in contactInfos" :key="info.id">
         <div class="card-title">
@@ -38,12 +39,15 @@
 <script>
 import Slot from "./Slot.vue";
 import Emit from "./Emit.vue";
+import CounterrMixin from "../mixins/counter.js"
 
 export default {
   components: {
     Slot: Slot,
     Emit: Emit,
   },
+
+  mixins: [CounterrMixin],
 
   props: {
     contactInfos: {
@@ -76,12 +80,14 @@ export default {
       let unblock_index = this.unblockUsers.indexOf(data.id);
       this.unblockUsers.splice(unblock_index, 1); // remove one item
       this.blockUsers.push(data.id); // add one item
+      this.clickCounterMethod(); // status change count
     },
     unblock(data) {
       data.isBlocked = false; // update status
       let block_index = this.blockUsers.indexOf(data.id);
       this.blockUsers.splice(block_index, 1); // remove one item
       this.unblockUsers.push(data.id); // add one item
+      this.clickCounterMethod(); // status change count
     },
   },
 
