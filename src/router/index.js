@@ -1,8 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from "/src/views/Home.vue";
-import About from "/src/views/About.vue";
-import Contact from "/src/views/Contact.vue";
+// // import all files when app first laod
+// import Home from "/src/views/Home.vue";
+// import About from "/src/views/About.vue";
+// import Contact from "/src/views/Contact.vue";
+
+// Lazy loading
+const Home = () => import("/src/views/Home.vue");
+const About = () => import("/src/views/About.vue");
+const Contact = () => import("/src/views/Contact.vue");
 
 
 const routes = [
