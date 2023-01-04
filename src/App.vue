@@ -1,176 +1,40 @@
 <template>
   <div>
-    <h3 style="margin: 5px">
-      {{ msg }}
-    </h3>
-    <Contact :contact-infos="infos"></Contact>
+    <ul>
+      <li><router-link to="/">Home</router-link></li>
+      <li><router-link to="/about">About</router-link></li>
+      <li><router-link to="/contact">Contact</router-link></li>
+    </ul>
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
-import ContactDetails from "./components/ContactDetails.vue";
-
-export default {
-  components: {
-    Contact: ContactDetails,
-  },
-  data() {
-    return {
-      msg: "Hi! I am vue cli.",
-      statusUpdateMessage: "Status updated successfully.",
-      infos: [
-        {
-          id: 1,
-          name: "Ali Azgar Rana",
-          age: 30,
-          occupation: "Businessman",
-          phone: "017",
-          isBlocked: false,
-        },
-        {
-          id: 2,
-          name: "Mohammad Al Amin Raju Dottry",
-          age: 29,
-          occupation: "Software Engineer",
-          phone: "016",
-          isBlocked: false,
-        },
-        {
-          id: 3,
-          name: "Ariful Islam Raj",
-          age: 19,
-          occupation: "Student",
-          phone: "018",
-          isBlocked: false,
-        },
-        {
-          id: 4,
-          name: "Ali Azgar Rana",
-          age: 30,
-          occupation: "Businessman",
-          phone: "017",
-          isBlocked: false,
-        },
-        {
-          id: 5,
-          name: "Al Amin Raju",
-          age: 29,
-          occupation: "Software Engineer",
-          phone: "016",
-          isBlocked: false,
-        },
-        {
-          id: 6,
-          name: "Ariful Islam Raj",
-          age: 19,
-          occupation: "Student",
-          phone: "018",
-          isBlocked: false,
-        },
-        {
-          id: 7,
-          name: "Ali Azgar Rana",
-          age: 30,
-          occupation: "Businessman",
-          phone: "017",
-          isBlocked: false,
-        },
-        {
-          id: 8,
-          name: "Al Amin Raju",
-          age: 29,
-          occupation: "Software Engineer",
-          phone: "016",
-          isBlocked: false,
-        },
-        {
-          id: 9,
-          name: "Ariful Islam Raj",
-          age: 19,
-          occupation: "Student",
-          phone: "018",
-          isBlocked: false,
-        },
-        {
-          id: 10,
-          name: "Ali Azgar Rana",
-          age: 30,
-          occupation: "Businessman",
-          phone: "017",
-          isBlocked: false,
-        },
-        {
-          id: 11,
-          name: "Al Amin Raju",
-          age: 29,
-          occupation: "Software Engineer",
-          phone: "016",
-          isBlocked: false,
-        },
-        {
-          id: 12,
-          name: "Ariful Islam Raj",
-          age: 19,
-          occupation: "Student",
-          phone: "018",
-          isBlocked: false,
-        },
-        {
-          id: 13,
-          name: "Ali Azgar Rana",
-          age: 30,
-          occupation: "Businessman",
-          phone: "017",
-          isBlocked: false,
-        },
-        {
-          id: 14,
-          name: "Al Amin Raju",
-          age: 29,
-          occupation: "Software Engineer",
-          phone: "016",
-          isBlocked: false,
-        },
-        {
-          id: 15,
-          name: "Ariful Islam Raj",
-          age: 19,
-          occupation: "Student",
-          phone: "018",
-          isBlocked: false,
-        },
-        {
-          id: 16,
-          name: "Ali Azgar Rana",
-          age: 30,
-          occupation: "Businessman",
-          phone: "017",
-          isBlocked: false,
-        },
-        {
-          id: 17,
-          name: "Al Amin Raju",
-          age: 29,
-          occupation: "Software Engineer",
-          phone: "016",
-          isBlocked: false,
-        },
-        {
-          id: 18,
-          name: "Ariful Islam Raj",
-          age: 19,
-          occupation: "Student",
-          phone: "018",
-          isBlocked: false,
-        },
-      ],
-    };
-  },
-
-  provide() {
-    return {
-      provideMessage: this.statusUpdateMessage
-    }
-  },
-};
 </script>
+
+
+<style scoped>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+</style>
