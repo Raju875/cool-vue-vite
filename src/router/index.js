@@ -9,12 +9,14 @@ import { createRouter, createWebHistory } from "vue-router";
 const Home = () => import("/src/views/Home.vue");
 const About = () => import("/src/views/About.vue");
 const Contact = () => import("/src/views/Contact.vue");
+const ContactDetails = () => import("../components/contact/Details.vue");
 
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/about", component: About },
-  { path: "/contact", component: Contact },
+  { path: "/", name:'home', component: Home },
+  { path: "/about", name:'about', component: About },
+  { path: "/contact", name:'contact.list', component: Contact },
+  { path: "/contact/details/:id", name:'contact.details', component: ContactDetails },
 ];
 
 const router = createRouter({

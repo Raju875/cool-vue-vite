@@ -6,7 +6,4 @@ var app = createApp(App);
 
 app.use(router);
 
-// Global  compmonent register
-// app.component("ContactDetails", ContactDetails);
-
 app.mount("#app");

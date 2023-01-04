@@ -38,8 +38,8 @@
 
 <script>
 import Slot from "./Slot.vue";
-import Emit from "./Emit.vue";
-import CounterrMixin from "../mixins/counter.js"
+import Emit from "./Button.vue";
+import CounterrMixin from "../../mixins/counter.js"
 
 export default {
   components: {
