@@ -11,12 +11,22 @@ const About = () => import("/src/views/About.vue");
 const Contact = () => import("/src/views/Contact.vue");
 const ContactDetails = () => import("../components/contact/Details.vue");
 
-
 const routes = [
-  { path: "/", name:'home', component: Home },
-  { path: "/about", name:'about', component: About },
-  { path: "/contact", name:'contact.list', component: Contact },
-  { path: "/contact/details/:id", name:'contact.details', component: ContactDetails },
+  { path: "/", name: "home", component: Home },
+  { path: "/about", name: "about", component: About },
+  { path: "/contact", name: "contact.list", component: Contact },
+  {
+    path: "/contact/details/:id/:slug",
+    name: "contact.details",
+    component: ContactDetails,
+    props: (route) => ({
+      id: parseInt(route.params.id),
+      slug: route.params.slug
+        .toLowerCase()
+        .replace(/[^\w ]+/g, "")
+        .replace(/ +/g, "-"),
+    }),
+  },
 ];
 
 const router = createRouter({

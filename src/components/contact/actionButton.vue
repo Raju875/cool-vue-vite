@@ -5,7 +5,7 @@
     </button>
     <button @click="provideInjectConsole(info)" v-else>Block</button>
     <button>
-      <router-link :to="{ name: 'contact.details', params: {id: info.id} }">Details</router-link>
+      <router-link :to="{ name: 'contact.details', params: {id: info.id, slug: slugUrl} }">Details</router-link>
     </button>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
       type: Object,
     },
   },
+
   methods: {
     provideInjectConsole(data) {
       this.$emit('block', data);
@@ -30,6 +31,14 @@ export default {
       console.log("(" + data.id + ") " + data.name);
     },
   },
+
+  computed: {
+    slugUrl() {
+      return this.info.name.toLowerCase()
+        .replace(/[^\w ]+/g, "")
+        .replace(/ +/g, "-");
+    }
+  }
 };
 </script>
 

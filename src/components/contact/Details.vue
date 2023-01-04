@@ -19,13 +19,22 @@ import dataSource from '../../data.json';
 
 export default {
   name: 'ContactDetails',
+    props: {
+    id: {
+      type: Number,
+      },
+    slug: {
+      type: String,
+    },
+  },
   data() {
     return {
       detailInfo: '',
     };
   },
   mounted() {
-      this.detailInfo = dataSource.infos.find(info => info.id === parseInt(this.$route.params.id));
+      console.log(this.slug)
+      this.detailInfo = dataSource.infos.find(info => info.id === this.id);
 },
 };  
 </script>

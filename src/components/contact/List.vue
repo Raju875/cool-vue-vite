@@ -38,7 +38,7 @@
 
 <script>
 import Slot from "./Slot.vue";
-import Emit from "./Button.vue";
+import Emit from "./actionButton.vue";
 import CounterrMixin from "../../mixins/counter.js"
 
 export default {
