@@ -1,6 +1,7 @@
 <template>
+  <GoBack/>
  <div class="row">
-      <div class="card col-2">
+      <div class="card col" v-if="detailInfo">
         <div class="card-title">
           <h3 class="title">{{ detailInfo.name }}</h3>
         </div>
@@ -16,9 +17,13 @@
 
 <script>
 import dataSource from '../../data.json';
+import GoBack from '../GoBack.vue';
 
 export default {
   name: 'ContactDetails',
+  components: {
+    GoBack
+  },
     props: {
     id: {
       type: Number,
@@ -32,9 +37,13 @@ export default {
       detailInfo: '',
     };
   },
-  mounted() {
-      console.log(this.slug)
-      this.detailInfo = dataSource.infos.find(info => info.id === this.id);
+  created() {
+    console.log(this.slug)
+    this.detailInfo = dataSource.infos.find(info => info.id === this.id);
+    if (!this.detailInfo) {
+      console.log('not found');
+      this.$router.push({ name: 'notFound' });
+    }
 },
 };  
 </script>

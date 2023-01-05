@@ -10,6 +10,7 @@ const Home = () => import("/src/views/Home.vue");
 const About = () => import("/src/views/About.vue");
 const Contact = () => import("/src/views/Contact.vue");
 const ContactDetails = () => import("../components/contact/Details.vue");
+const NotFound = () => import("../components/NotFound.vue");
 
 const routes = [
   { path: "/", name: "home", component: Home },
@@ -19,13 +20,12 @@ const routes = [
     path: "/contact/details/:id/:slug",
     name: "contact.details",
     component: ContactDetails,
-    props: (route) => ({
-      id: parseInt(route.params.id),
-      slug: route.params.slug
-        .toLowerCase()
-        .replace(/[^\w ]+/g, "")
-        .replace(/ +/g, "-"),
-    }),
+    props: (route) => ({...route.params, id: parseInt(route.params.id)}),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: 'notFound',
+    component: NotFound
   },
 ];
 
