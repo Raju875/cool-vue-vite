@@ -4,9 +4,9 @@
       Unblock
     </button>
     <button @click="provideInjectConsole(info)" v-else>Block</button>
-    <button>
-      <router-link :to="{ name: 'contact.details', params: {id: info.id, slug: slugUrl} }">Details</router-link>
-    </button>
+      <router-link :to="{ name: 'contact.details', params: {id: info.id, slug: slugUrl} }">
+      <button>Details</button>
+    </router-link>
   </div>
 </template>
 
