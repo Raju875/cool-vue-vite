@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Slot>
+    <!-- <Slot>
       <template #[slotName.slot1]="slotProps">
         {{ slotProps.textFromChildSlot }}
         <br />
@@ -10,15 +10,11 @@
       URL: <a target="blank" :href="company.url">{{ company.url }}</a>
       <br />
       <template #[slotName.slot3]>Location: {{ company.location }}</template>
-    </Slot>
+    </Slot> -->
 
     <div class="row">
       <div style="margin: 5px;">
         <h3>{{ contactMessage }}</h3>
-        <h4>Total: {{ contactInfos.length }}</h4>
-        <h4>Block: {{ blockUsers.length }}</h4>
-        <h4>Unblock: {{ unblockUsers.length }}</h4>
-        <h4>Click Counter: {{ clickCounter }}</h4>
       </div>
       <div class="card col-2" v-for="info in contactInfos" :key="info.id">
         <div class="card-title">
@@ -28,8 +24,7 @@
           <li>{{ info.age }}</li>
           <li>{{ info.occupation }}</li>
           <li>{{ info.phone }}</li>
-
-          <Emit :info="info" @block="block" @unblock="unblock"></Emit>
+          <ActionButton :info="info" @updateStatusAction="updateStatusAction"></ActionButton>
         </div>
       </div>
     </div>
@@ -37,29 +32,24 @@
 </template>
 
 <script>
+import dataSource from '../../data.json';
 import Slot from "./Slot.vue";
-import Emit from "./actionButton.vue";
-import CounterrMixin from "../../mixins/counter.js"
+import ActionButton from "./ActionButton.vue";
 
 export default {
   components: {
-    Slot: Slot,
-    Emit: Emit,
+    Slot,
+    ActionButton
   },
-
-  mixins: [CounterrMixin],
-
-  props: {
-    contactInfos: {
-      type: Object,
-      required: true,
-    },
-  },
+  emits: ['getContactInfos', 'getUpdateAction'],
 
   data() {
     return {
-      blockUsers: [],
-      unblockUsers: [],
+      contactInfos: dataSource.infos,
+      getAction: {
+        actionId: '',
+        isBlock: '',
+      },
       contactMessage: "All contact details",
       slotName: {
         slot1: "company",
@@ -75,34 +65,17 @@ export default {
   },
 
   methods: {
-    block(data) {
-      data.isBlocked = true; // update status
-      let unblock_index = this.unblockUsers.indexOf(data.id);
-      this.unblockUsers.splice(unblock_index, 1); // remove one item
-      this.blockUsers.push(data.id); // add one item
-      this.clickCounterMethod(); // status change count
+    getAllContactInfos() {
+      this.$emit('getContactInfos', this.contactInfos);
     },
-    unblock(data) {
-      data.isBlocked = false; // update status
-      let block_index = this.blockUsers.indexOf(data.id);
-      this.blockUsers.splice(block_index, 1); // remove one item
-      this.unblockUsers.push(data.id); // add one item
-      this.clickCounterMethod(); // status change count
+
+    updateStatusAction(data) {
+      this.$emit('getUpdateAction', data);
     },
   },
 
   mounted() {
-    let block = [];
-    let unblock = [];
-    this.contactInfos.forEach(function (info, index) {
-      if (info.isBlocked) {
-        block.push(info.id);
-      } else if (!info.isBlocked) {
-        unblock.push(info.id);
-      }
-    });
-    this.blockUsers = block;
-    this.unblockUsers = unblock;
+    this.getAllContactInfos();
   },
 };
 </script>

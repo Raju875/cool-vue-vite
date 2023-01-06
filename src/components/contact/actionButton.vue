@@ -1,9 +1,9 @@
 <template>
   <div style="text-align: center">
-    <button @click="$emit('unblock', info)" v-if="info.isBlocked">
+    <button @click="getUpdateStatus(info)" v-if="info.isBlocked">
       Unblock
     </button>
-    <button @click="provideInjectConsole(info)" v-else>Block</button>
+    <button @click="getUpdateStatus(info)" v-else>Block</button>
       <router-link :to="{ name: 'contact.details', params: {id: info.id, slug: slugUrl} }">
       <button>Details</button>
     </router-link>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  emits: ['unblock', 'block'],
+  emits: ['updateStatusAction'],
   inject: {
     injectlocalMessage: {
       from: 'provideMessage'
@@ -25,10 +25,9 @@ export default {
   },
 
   methods: {
-    provideInjectConsole(data) {
-      this.$emit('block', data);
-      console.log(this.injectlocalMessage);
-      console.log("(" + data.id + ") " + data.name);
+    getUpdateStatus(data) {
+      data.isBlocked = !data.isBlocked;
+      this.$emit('updateStatusAction', data);
     },
   },
 

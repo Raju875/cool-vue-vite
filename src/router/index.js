@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/contact",
     name: "contact.list",
-    component: import("/src/views/Contact.vue"),
+    component: () => import("/src/views/Contact.vue"),
   },
   {
     path: "/contact/details/:id/:slug",
@@ -21,7 +21,7 @@ const routes = [
   {
     path: "/:pathMatch(.*)*",
     name: "notFound",
-    component: import("../components/NotFound.vue"),
+    component: () => import("../components/NotFound.vue"),
   },
 ];
 

@@ -14,7 +14,7 @@
       "age": 29,
       "occupation": "Software Engineer",
       "phone": "016",
-      "isBlocked": false
+      "isBlocked": true
     },
     {
       "id": 3,
