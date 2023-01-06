@@ -4,7 +4,8 @@
       Unblock
     </button>
     <button @click="getUpdateStatus(info)" v-else>Block</button>
-      <router-link :to="{ name: 'contact.details', params: {id: info.id, slug: slugUrl} }">
+      <!-- <router-link :to="{ name: 'contact.details', params: {id: info.id, slug: slugUrl} }"> -->
+      <router-link :to="{ name: 'contact.cardDetails', params: {id: info.id} }">
       <button>Details</button>
     </router-link>
   </div>

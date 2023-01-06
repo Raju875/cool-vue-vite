@@ -9,6 +9,17 @@
           <li>Occupation: {{ detailInfo.occupation }}</li>
           <li>Phone: {{ detailInfo.phone }}</li>
           <li>Blocked: {{ detailInfo.isBlocked ? 'Yes' : 'No'}}</li>
+          <li>
+            <div style="text-align: center">
+                <router-link target="_blank" :to="{ name: 'contact.details', params: {id: detailInfo.id, slug: slugUrl} }">
+                    <button>Details</button>
+                </router-link>
+                <GoBack/>
+                <router-link :to="{ name: 'contact.list' }">
+                    <button>Close</button>
+                </router-link>
+            </div>
+        </li>
         </div>
       </div>
     </div>
@@ -16,30 +27,51 @@
 
 <script>
 import dataSource from '../../data.json';
+import GoBack from '../GoBack.vue';
 
 export default {
-  name: 'ContactDetails',
+  name: 'ContactCardDetails',
+  components: {
+    GoBack
+  },
     props: {
     id: {
       type: Number,
-      },
-    slug: {
-      type: String,
-    },
+      }
   },
   data() {
     return {
       detailInfo: '',
     };
-  },
-  created() {
-    console.log(this.slug)
-    this.detailInfo = dataSource.infos.find(info => info.id === this.id);
-    if (!this.detailInfo) {
-      console.log('not found');
-      this.$router.push({ name: 'notFound' });
-    }
-},
+    },
+
+    methods: {
+        getCardDetails() {
+            this.detailInfo = dataSource.infos.find(info => info.id === this.id);
+            if (!this.detailInfo) {
+            console.log('not found');
+            this.$router.push({ name: 'notFound' });
+            }
+        }
+    },
+
+    computed: {
+        slugUrl() {
+            return this.detailInfo.name.toLowerCase()
+                .replace(/[^\w ]+/g, "")
+                .replace(/ +/g, "-");
+        },
+    },
+    
+    watch: {
+        id() {
+            this.getCardDetails();
+        },
+    },
+
+    created() {
+        this.getCardDetails();
+    },
 };  
 </script>
 

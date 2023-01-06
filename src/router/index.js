@@ -11,6 +11,16 @@ const routes = [
     path: "/contact",
     name: "contact.list",
     component: () => import("/src/views/Contact.vue"),
+    children: [
+      {
+        path: "details/:id",
+        name: "contact.cardDetails",
+        component: () => import("../components/contact/CardDetails.vue"),
+        props: (route) => ({ id: parseInt(route.params.id) }),
+      },
+
+      // ...other sub routes
+    ],
   },
   {
     path: "/contact/details/:id/:slug",

@@ -4,7 +4,7 @@
           :contactSummary="contactSummary" 
           :updateAction="updateAction"
         ></Summary>
-        
+        <router-view></router-view>
         <ContactList
           @getContactInfos="getContactSummary"
           @getUpdateAction="getUpdateAction"
