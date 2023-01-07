@@ -15,15 +15,15 @@
 <script>
 
 export default {
-    props: {
-        contactSummary: {
-            type: Object,
-            required: true,
-        },
-        updateAction: {
-            type: Object,
-            required: true,
-        },
+  props: {
+    contactSummary: {
+      type: Object,
+      required: true,
+    },
+    updateAction: {
+      type: Object,
+      required: true,
+    },
   },
 
   computed: {

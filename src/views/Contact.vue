@@ -7,7 +7,6 @@
         <router-view></router-view>
         <ContactList
           @getContactInfos="getContactSummary"
-          @getUpdateAction="getUpdateAction"
         ></ContactList>
     </div>
 </template>
@@ -29,6 +28,7 @@ export default {
   data() {
     return {
       msg: "Hi! I am vue cli.",
+      // statusUpdateMessage: "Status updated successfully.",
       statusUpdateMessage: "Status updated successfully.",
       contactSummary: {
         totalUsers: 0,
@@ -64,7 +64,7 @@ export default {
 
   provide() {
     return {
-      provideMessage: this.statusUpdateMessage
+      getUpdateAction: this.getUpdateAction
     }
   },
 };

@@ -13,10 +13,9 @@
 
 <script>
 export default {
-  emits: ['updateStatusAction'],
   inject: {
-    injectlocalMessage: {
-      from: 'provideMessage'
+    getUpdateAction: {
+      from: 'getUpdateAction'
     }
   },
   props: {
@@ -25,10 +24,17 @@ export default {
     },
   },
 
+  data() {
+    return {
+      updateInfoByStatus : 'one',
+    }
+  },
+
   methods: {
     getUpdateStatus(data) {
       data.isBlocked = !data.isBlocked;
-      this.$emit('updateStatusAction', data);
+      this.updateInfoByStatus = data;
+      this.getUpdateAction(data);
     },
   },
 

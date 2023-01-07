@@ -24,7 +24,7 @@
           <li>{{ info.age }}</li>
           <li>{{ info.occupation }}</li>
           <li>{{ info.phone }}</li>
-          <ActionButton :info="info" @updateStatusAction="updateStatusAction"></ActionButton>
+          <ActionButton :info="info"></ActionButton>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@ export default {
     Slot,
     ActionButton
   },
-  emits: ['getContactInfos', 'getUpdateAction'],
+  emits: ['getContactInfos'],
 
   data() {
     return {
@@ -67,10 +67,6 @@ export default {
   methods: {
     getAllContactInfos() {
       this.$emit('getContactInfos', this.contactInfos);
-    },
-
-    updateStatusAction(data) {
-      this.$emit('getUpdateAction', data);
     },
   },
 
